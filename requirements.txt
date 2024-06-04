@@ -1,0 +1,12 @@
+pandas
+numpy
+seaborn
+matplotlib
+scikit-learn
+imblearn
+catboost
+xgboost
+Flask
+
+# -e . 
+# This gets sync with setup.py
