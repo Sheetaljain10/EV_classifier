@@ -104,6 +104,8 @@ class DataTransformation:
             )
             target_feature_test_df = label_encoder.transform(target_feature_test_df)
 
+            
+
             # Ensure the target feature is reshaped correctly
             # target_feature_train_df = np.array(target_feature_train_df).reshape(-1, 1)
             # target_feature_test_df = np.array(target_feature_test_df).reshape(-1, 1)
@@ -129,7 +131,6 @@ class DataTransformation:
 
             # print(train_arr)
 
-            # ERROR
             train_arr = np.c_[
                 input_feature_train_arr,
                 np.array(target_feature_train_df),
