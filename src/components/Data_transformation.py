@@ -84,14 +84,14 @@ class DataTransformation:
             # numerical_columns = ["Model Year", "Electric Range", "Base MSRP"]
 
             input_feature_train_df = train_df.drop(columns=[target_column_name], axis=1)
-            target_feature_train_df = train_df[target_column_name]
+            target_feature_train_df = pd.DataFrame(train_df[target_column_name])
 
             # print(input_feature_train_df.shape, " ", target_feature_train_df.shape)
 
             input_feature_test_df = test_df.drop(columns=[target_column_name], axis=1)
-            target_feature_test_df = test_df[target_column_name]
+            target_feature_test_df = pd.DataFrame(test_df[target_column_name])
 
-            # print(input_feature_test_df.shape, " ", target_feature_test_df.shape)
+            # print(input_feature_test_df, "\n\n ", target_feature_test_df)
 
             logging.info(
                 f"Applying preprocessing object on training dataframe and testing dataframe."
@@ -111,10 +111,12 @@ class DataTransformation:
             input_feature_train_arr = preprocessing_obj.fit_transform(
                 input_feature_train_df
             )
+            input_feature_train_arr = input_feature_train_arr.toarray()
             input_feature_test_arr = preprocessing_obj.transform(input_feature_test_df)
+            input_feature_test_arr = input_feature_test_arr.toarray()
 
-            # print("\n\nROWS:", input_feature_train_arr.shape)
-            # print("\n\nROWS: ", input_feature_test_df.shape)
+            print("\n\nROWS:", input_feature_train_arr.shape)
+            print("\n\nROWS: ", input_feature_test_arr.shape)
 
             # target_feature_train_df = np.reshape(target_feature_train_df, (149503, 1))
             # target_feature_test_df = np.reshape(target_feature_test_df, (37376, 1))
@@ -124,6 +126,8 @@ class DataTransformation:
 
             # train_arr = np.hstack((input_feature_train_arr, target_feature_train_df))
             # test_arr = np.hstack((input_feature_test_arr, target_feature_test_df))
+
+            # print(train_arr)
 
             # ERROR
             train_arr = np.c_[

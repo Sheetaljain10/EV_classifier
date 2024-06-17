@@ -30,8 +30,10 @@ class ModelTrainer:
     def initiate_model_trainer(self, train_array, test_array):
         try:
             logging.info("Split training and test input data")
-            print(train_array.shape)
-            print(test_array.shape)
+            train_array.reshape(-1, 1)
+            test_array.reshape(-1, 1)
+            # print(train_array)
+            # print(test_array.shape)
             X_train, y_train, X_test, y_test = (
                 train_array[:, :-1],
                 train_array[:, -1],
@@ -42,9 +44,33 @@ class ModelTrainer:
                 "Random Forest": RandomForestClassifier(),
                 "Decision Tree": DecisionTreeClassifier(),
                 "Linear Regression": LinearRegression(),
-                "K-Neighbors Classifier": KNeighborsRegressor(),
                 "XGBClassifier": XGBClassifier(),
                 "AdaBoost Classifier": AdaBoostClassifier(),
+            }
+
+            params = {
+                "Decision Tree": {
+                    "criterion": [
+                        "gini",
+                        "log_loss",
+                        "entropy",
+                    ],
+                },
+                "Random Forest": {"n_estimators": [8, 16, 32, 64, 128, 256]},
+                "Gradient Boosting": {
+                    "learning_rate": [0.1, 0.01, 0.05, 0.001],
+                    "subsample": [0.6, 0.7, 0.75, 0.8, 0.85, 0.9],
+                    "n_estimators": [8, 16, 32, 64, 128, 256],
+                },
+                "Linear Regression": {},
+                "XGBClassifier": {
+                    "learning_rate": [0.1, 0.01, 0.05, 0.001],
+                    "n_estimators": [8, 16, 32, 64, 128, 256],
+                },
+                "AdaBoost Classifier": {
+                    "learning_rate": [0.1, 0.01, 0.5, 0.001],
+                    "n_estimators": [8, 16, 32, 64, 128, 256],
+                },
             }
 
             model_report: dict = evaluate_models(
@@ -53,13 +79,13 @@ class ModelTrainer:
                 X_test=X_test,
                 y_test=y_test,
                 models=models,
+                param=params,
             )
 
-            ## To get best model score from dict
+            # To get best model score from dict
             best_model_score = max(sorted(model_report.values()))
 
-            ## To get best model name from dict
-
+            # To get best model name from dict
             best_model_name = list(model_report.keys())[
                 list(model_report.values()).index(best_model_score)
             ]

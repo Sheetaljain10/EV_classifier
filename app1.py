@@ -24,7 +24,7 @@ from PIL import Image
 # app=Flask(__name__)
 # Swagger(app)
 
-pickle_in = open("classifier.pkl", "rb")
+pickle_in = open("D:\\EV_selection\\artifacts\\model.pkl", "rb")
 classifier = pickle.load(pickle_in)
 
 
@@ -77,16 +77,16 @@ def predict_note_authentication(
 def main():
     st.title("EV SELECTOR")
     html_temp = """
-    <div style="background-color:tomato;padding:10px">
-    <h2 style="color:white;text-align:center;">Streamlit Bank Authenticator ML App </h2>
+    <div style="background-color:Darkblue;padding:10px">
+    <h2 style="color:white;text-align:center;">Streamlit EV Selection ML App </h2>
     </div>
     """
     st.markdown(html_temp, unsafe_allow_html=True)
-    MODELYEAR = st.text_input("Model year", "Type Here")
-    MAKE = st.text_input("Make", "Type Here")
-    Model = st.text_input("Model", "Type Here")
-    ElectricVehicleType = st.text_input("Electric Vehicle Type", "Type Here")
-    ElectricRange = st.text_input("Electric Range", "Type Here")
+    MODELYEAR = st.text_input("Model Year", placeholder="Type Here")
+    MAKE = st.text_input("Make", placeholder="Type Here")
+    Model = st.text_input("Model",placeholder= "Type Here")
+    ElectricVehicleType = st.text_input("Electric Vehicle Type",placeholder= "Type Here")
+    ElectricRange = st.text_input("Electric Range", placeholder="Type Here")
     result = ""
     if st.button("Predict"):
         result = predict_note_authentication(
@@ -94,7 +94,7 @@ def main():
         )
     st.success("The output is {}".format(result))
     if st.button("About"):
-        st.text("Lets LEARN TO PREDICT CLASSES")
+        st.text("LETS LEARN TO PREDICT CLASSES")
         st.text("Built with Streamlit")
 
 
