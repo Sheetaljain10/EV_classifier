@@ -1,0 +1,47 @@
+<html>
+<body>
+    <div class="login">
+       <h1>Electric vehicle Performance based selector</h1>
+   
+       <form action="{{ url_for('predict_datapoint')}}" method="post">
+        <h1>
+            <legend>Electric Vehicle Performance Based Selection</legend>
+        </h1>
+        <div class="mb-3">
+            <label class="form-label">Model_year</label>
+            <input class="form-control" type="text" id="Model_year" name="Model_year" placeholder="Enter you Model Year" required><br>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Make</label>
+            <input class="form-control" type="text" id="Make" name="Make" placeholder="Enter you Manufacturer: " required><br>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Model</label>
+            <input class="form-control" type="text" id="Model" name="Model" placeholder="Enter your Model: " required><br>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Electric Vehicle Type</label>
+            <select class="form-control" name="Electric Vehicle Type" placeholder="Enter your Electric Vehicle Type" required>
+                <option class="placeholder" selected disabled value="">Electric Vehicle Type</option>
+                <option value="Battery Electric Vehicle (BEV)">
+                    Battery Electric Vehicle (BEV)
+                </option>
+                <option value="Plug-in Hybrid Electric Vehicle (PHEV)">
+                    Plug-in Hybrid Electric Vehicle (PHEV)
+                </option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Electric Range</label>
+            <input class="form-control" type="number" id="Electric Range" name="Electric Range" placeholder="Enter your Electric Range: " required><br>
+        </div>
+        
+        <div class="mb-3">
+            <input class="btn btn-primary" type="submit" value="Predict your Score" required />
+        </div>
+    </form>
+    <h2>
+       THE PREDICTION IS {{results}}
+    </h2>
+   <body>
+</html>

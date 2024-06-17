@@ -2,10 +2,8 @@ import os
 import sys
 from dataclasses import dataclass
 
-from catboost import CatBoostRegressor
 from sklearn.ensemble import (
     AdaBoostClassifier,
-    GradientBoostingClassifier,
     RandomForestClassifier,
 )
 from sklearn.linear_model import LinearRegression
@@ -32,6 +30,8 @@ class ModelTrainer:
     def initiate_model_trainer(self, train_array, test_array):
         try:
             logging.info("Split training and test input data")
+            print(train_array.shape)
+            print(test_array.shape)
             X_train, y_train, X_test, y_test = (
                 train_array[:, :-1],
                 train_array[:, -1],
@@ -41,11 +41,9 @@ class ModelTrainer:
             models = {
                 "Random Forest": RandomForestClassifier(),
                 "Decision Tree": DecisionTreeClassifier(),
-                "Gradient Boosting": GradientBoostingClassifier(),
                 "Linear Regression": LinearRegression(),
                 "K-Neighbors Classifier": KNeighborsRegressor(),
                 "XGBClassifier": XGBClassifier(),
-                "CatBoosting Classifier": CatBoostRegressor(verbose=False),
                 "AdaBoost Classifier": AdaBoostClassifier(),
             }
 
