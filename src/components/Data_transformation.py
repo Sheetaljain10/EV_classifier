@@ -125,6 +125,7 @@ class DataTransformation:
             # train_arr = np.hstack((input_feature_train_arr, target_feature_train_df))
             # test_arr = np.hstack((input_feature_test_arr, target_feature_test_df))
 
+            # ERROR
             train_arr = np.c_[
                 input_feature_train_arr,
                 np.array(target_feature_train_df),
