@@ -104,8 +104,6 @@ class DataTransformation:
             )
             target_feature_test_df = label_encoder.transform(target_feature_test_df)
 
-            
-
             # Ensure the target feature is reshaped correctly
             # target_feature_train_df = np.array(target_feature_train_df).reshape(-1, 1)
             # target_feature_test_df = np.array(target_feature_test_df).reshape(-1, 1)
@@ -117,8 +115,8 @@ class DataTransformation:
             input_feature_test_arr = preprocessing_obj.transform(input_feature_test_df)
             input_feature_test_arr = input_feature_test_arr.toarray()
 
-            print("\n\nROWS:", input_feature_train_arr.shape)
-            print("\n\nROWS: ", input_feature_test_arr.shape)
+            # print("\n\nROWS:", input_feature_train_arr.shape)
+            # print("\n\nROWS: ", input_feature_test_arr.shape)
 
             # target_feature_train_df = np.reshape(target_feature_train_df, (149503, 1))
             # target_feature_test_df = np.reshape(target_feature_test_df, (37376, 1))
@@ -133,11 +131,11 @@ class DataTransformation:
 
             train_arr = np.c_[
                 input_feature_train_arr,
-                np.array(target_feature_train_df),
+                np.array(target_feature_train_df).ravel(),
             ]
             test_arr = np.c_[
                 input_feature_test_arr,
-                np.array(target_feature_test_df),
+                np.array(target_feature_test_df).ravel(),
             ]
 
             # print(train_arr)

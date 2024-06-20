@@ -8,11 +8,9 @@ import numpy as np
 import pickle
 import pandas as pd
 
-
+# USES STREAMLIT
 import streamlit as st
 from src.pipeline.predict_pipeline import CustomData, PredictPipeline
-
-from PIL import Image
 
 # app=Flask(__name__)
 # Swagger(app)
@@ -27,9 +25,7 @@ def welcome():
 
 
 # @app.route('/predict',methods=["Get"])
-def predict_note_authentication(
-    ModelYear, Make, Model, ElectricVehicleType, ElectricRange
-):
+def predict_EV(ModelYear, Make, Model, ElectricVehicleType, ElectricRange):
     """Let's Select the EV Note
     This is using docstrings for specifications.
     ---
@@ -75,7 +71,7 @@ def predict_note_authentication(
     results = prediction.predict(pred_df)
     if results < 1:
         A = "Eligibility unknown as battery range has not been researched"
-    elif 1 < results < 2:
+    elif 1 <= results < 2:
         A = "Clean Alternative Fuel Vehicle Eligible"
     else:
         A = "Not eligible due to low battery range"
@@ -99,9 +95,7 @@ def main():
     ElectricRange = st.text_input("Electric Range", placeholder="Type Here")
     result = ""
     if st.button("Predict"):
-        result = predict_note_authentication(
-            MODELYEAR, MAKE, Model, ElectricVehicleType, ElectricRange
-        )
+        result = predict_EV(MODELYEAR, MAKE, Model, ElectricVehicleType, ElectricRange)
     st.success("The output is {}".format(result))
     if st.button("About"):
         st.text("LETS LEARN TO PREDICT CLASSES")
