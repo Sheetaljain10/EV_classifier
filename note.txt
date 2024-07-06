@@ -1,1 +1,3 @@
 The error of Relative imports fixed by " set PYTHONPATH=D:\EV_selection"
+
+python D:\EV_selection\src\components\Data_ingestion.py

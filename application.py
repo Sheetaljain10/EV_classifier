@@ -70,9 +70,9 @@ def predict_EV(ModelYear, Make, Model, ElectricVehicleType, ElectricRange):
     prediction = PredictPipeline()
     results = prediction.predict(pred_df)
     if results < 1:
-        A = "Eligibility unknown as battery range has not been researched"
-    elif 1 <= results < 2:
         A = "Clean Alternative Fuel Vehicle Eligible"
+    elif 1 <= results < 2:
+        A = "Eligibility unknown as battery range has not been researched"
     else:
         A = "Not eligible due to low battery range"
     return A
@@ -85,13 +85,24 @@ def main():
     <h2 style="color:white;text-align:center;">Streamlit EV Selection ML App </h2>
     </div>
     """
+
+    options = [
+        "",
+    "Battery Electric Vehicle (BEV)",
+    "Plug-in Hybrid Electric Vehicle (PHEV)",
+    ]
+    
+
     st.markdown(html_temp, unsafe_allow_html=True)
     MODELYEAR = st.text_input("Model Year", placeholder="Type Here")
     MAKE = st.text_input("Make", placeholder="Type Here")
     Model = st.text_input("Model", placeholder="Type Here")
-    ElectricVehicleType = st.text_input(
-        "Electric Vehicle Type", placeholder="Type Here"
-    )
+    ElectricVehicleType = st.selectbox(
+    "Electric Vehicle Type",
+    options,
+    index=0,
+)
+    
     ElectricRange = st.text_input("Electric Range", placeholder="Type Here")
     result = ""
     if st.button("Predict"):
